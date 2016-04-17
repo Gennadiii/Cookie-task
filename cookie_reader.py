@@ -51,7 +51,7 @@ def print_result(result, number_of_tries, how_to_display):
 			cookie_price = prepared_for_float(result[1])
 		else:
 			inserted_money = ''
-			cookie_price = ''		
+			cookie_price = ''
 	print( '| ' + 'attempt # ' + str(number_of_tries) + ' '*( 7 - len( str(number_of_tries) ) ) + '| ' + \
 		inserted_money + ' '*( 5 - len(inserted_money) ) + ' | ' + \
 		cookie_price + ' '*( 5 - len(cookie_price) ) + ' | ' + output )
@@ -62,6 +62,12 @@ def print_line():
 
 print_line()
 data = json_load(reader_log)
+
+def display_time(time):
+	minutes = str( time // 60 )
+	seconds = str( time % 60 )
+	if len(seconds) == 1: seconds = '0' + seconds
+	print( 'Spent time for all attempts: ' + minutes + ':' + seconds )
 
 def display_flow():
 	while True:	
@@ -77,6 +83,7 @@ def display_all():
 		print_result( data[ "try_number_" + str(j) ], str(j), how_to_display )
 	data["reader_is_updated"] = True
 	json_dump(data, reader_log)
+	display_time( data['finish_time'] - data['start_time'] )
 
 if what_to_display == 'continue':
 	display_all()
