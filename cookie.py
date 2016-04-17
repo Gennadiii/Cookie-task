@@ -3,6 +3,8 @@ from os.path import expanduser
 from re import match
 from sys import argv
 
+if len(argv) == 1: print('Please enter the name of log file as flag like - cookie Gennadii_Mishchevskii'); exit()
+
 name = argv[1]
 log = expanduser( r'~\Desktop\\' + name + '.txt' )
 log_api = {
