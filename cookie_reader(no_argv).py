@@ -9,7 +9,7 @@ def json_dump(data):
     json.dump(data, open(log, 'w'))
 
 def print_result(result, number_of_tries):
-	print( '| ' + 'attempt # ' + str(number_of_tries) + ' '*( 7 - len(number_of_tries) ) + '| ' + \
+	print( '| ' + 'attempt # ' + str(number_of_tries) + ' '*( 7 - len( str(number_of_tries) ) ) + '| ' + \
 		result[0] + ' '*( 5 - len(result[0]) ) + ' | ' + \
 		result[1] + ' '*( 5 - len(result[1]) ) + ' | ' + result[2] )
 
