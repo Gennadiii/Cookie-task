@@ -52,7 +52,7 @@ def print_result(result, number_of_tries, how_to_display):
 		else:
 			inserted_money = ''
 			cookie_price = ''		
-	print( '| ' + 'attempt # ' + str(number_of_tries) + ' '*( 7 - len(number_of_tries) ) + '| ' + \
+	print( '| ' + 'attempt # ' + str(number_of_tries) + ' '*( 7 - len( str(number_of_tries) ) ) + '| ' + \
 		inserted_money + ' '*( 5 - len(inserted_money) ) + ' | ' + \
 		cookie_price + ' '*( 5 - len(cookie_price) ) + ' | ' + output )
 	print_line()
