@@ -2,6 +2,7 @@ import json
 from os.path import expanduser
 from re import match
 from sys import argv
+from time import time
 
 if len(argv) == 1: print('Please enter the name of log file as flag like - cookie Gennadii_Mishchevskii'); exit()
 
@@ -9,7 +10,8 @@ name = argv[1]
 log = expanduser( r'~\Desktop\\' + name + '.txt' )
 log_api = {
     "number_of_tries" : -1,
-    "reader_is_updated": True
+    "reader_is_updated": True,
+    "start_time": int( time() )
 }
 invalid_input_message = 'Invalid input. Try again.'
 
@@ -77,4 +79,5 @@ if __name__ == '__main__':
         data[ 'try_number_' + str( data['number_of_tries'] + 1 ) ] = [ inserted_money, chosen_cookie, result, invalid_input ]
         data['number_of_tries'] += 1
         data['reader_is_updated'] = False
+        data['finish_time'] = int( time() )
         json_dump(data, log)
