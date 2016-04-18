@@ -11,7 +11,7 @@ log = expanduser( r'~\Desktop\\' + name + '.txt' )
 log_api = {
     "number_of_tries" : -1,
     "reader_is_updated": True,
-    "start_time": int( time() )
+    'start_time': int( time() )
 }
 invalid_input_message = 'Invalid input. Try again.'
 
@@ -21,11 +21,17 @@ def json_load(log):
 def json_dump(data, log):
     json.dump(data, open(log, 'w'))
 
-def prepared_for_float(value):
+def replace_separate_symbol_with_dot(value, position):
     float_value = False
-    if len(value) > 2: float_value = match( '\D', value[-3] )
-    if float_value: value = value.replace( value[-3], '.' )
-    return "{:.2f}".format( float(value) )
+    if len(value) > 2: float_value = match( '\D', value[position] )
+    if float_value: return value.replace( value[position], '.' )
+    return False
+
+def prepared_for_float(value):
+    prepared_value = replace_separate_symbol_with_dot(value, -3)
+    if not prepared_value: prepared_value = replace_separate_symbol_with_dot(value, -2)
+    if not prepared_value: prepared_value = value
+    return "{:.2f}".format( float(prepared_value) )
 
 def validated(purpose, value=''):
     if len(value) == 0: return False
@@ -74,7 +80,7 @@ if __name__ == '__main__':
             result = invalid_input_message
         if not invalid_input: result = game(inserted_money, chosen_cookie)
         print(result)
-        if ( len(inserted_money) != 0 or len(chosen_cookie) != 0 ) and ( inserted_money[0] == '-' or chosen_cookie[0] == '-' ): \
+        if ( len(inserted_money) != 0 and len(chosen_cookie) != 0 ) and ( inserted_money[0] == '-' or chosen_cookie[0] == '-' ): \
         print('What are you doing? It\'s a real vending machine. You can\'t insert less than 0 money or order cheaper than 0 cookie ) But nice try ;))')
         data[ 'try_number_' + str( data['number_of_tries'] + 1 ) ] = [ inserted_money, chosen_cookie, result, invalid_input ]
         data['number_of_tries'] += 1
