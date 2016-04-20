@@ -3,6 +3,7 @@ from os.path import expanduser
 from re import match
 from sys import argv
 from time import time
+from time import sleep
 
 if len(argv) == 1: print('Please enter the name of log file as flag like - cookie Gennadii_Mishchevskii'); exit()
 
@@ -16,7 +17,11 @@ log_api = {
 invalid_input_message = 'Invalid input. Try again.'
 
 def json_load(log):
-    return json.load(open(log, 'r'))
+    while True:
+        try:
+            return json.load(open(log, 'r'))
+        except Exception:
+            sleep(0.5)
 
 def json_dump(data, log):
     json.dump(data, open(log, 'w'))
@@ -62,7 +67,7 @@ def game(inserted_money, chosen_cookie):
     if chosen_cookie > inserted_money and not ( validate_inserted_money(inserted_money) or validate_chosen_cookie(chosen_cookie) ):
         return 'Not enough money'
     if str(chosen_cookie)[-2:] == '.5' and inserted_money % chosen_cookie == 0 and inserted_money > chosen_cookie:
-        return str( int( inserted_money / chosen_cookie ) ) + ' coockies returned' 
+        return str( int( inserted_money / chosen_cookie ) ) + ' cookies returned' 
     return  '1 cookie returned and your change is: ' + str( inserted_money - chosen_cookie ) + '0'
 
 if __name__ == '__main__':
