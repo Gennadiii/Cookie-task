@@ -16,6 +16,13 @@ log_api = {
 }
 invalid_input_message = 'Invalid input. Try again.'
 
+def display_task_description():
+    print("""It's a standard vending machine. You insert money, choose product - get what you ordered.
+All prices in machine are divisible by 0.5 and so are money you have
+You get only 1 cookie per transaction
+You choose not cookie but the price of cookie, expensive cookies are just better ;)
+""")
+
 def json_load(log):
     while True:
         try:
@@ -71,6 +78,7 @@ def game(inserted_money, chosen_cookie):
     return  '1 cookie returned and your change is: ' + str( inserted_money - chosen_cookie ) + '0'
 
 if __name__ == '__main__':
+    display_task_description()
     json_dump(log_api, log)
     while True:
         invalid_input = False
