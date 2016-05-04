@@ -12,7 +12,8 @@ log = expanduser( r'~\Desktop\\' + name + '.txt' )
 log_api = {
     "number_of_tries" : -1,
     "reader_is_updated": True,
-    'start_time': int( time() )
+    "mistakes": 0,
+    "start_time": int( time() )
 }
 invalid_input_message = 'Invalid input. Try again.'
 
@@ -84,6 +85,9 @@ if __name__ == '__main__':
         invalid_input = False
         data = json_load(log)
         inserted_money = input('\n'*2 +'Insert money:                    ')
+        if inserted_money[0] == 'e':
+            data['mistakes'] += 1
+            inserted_money = inserted_money[1:]
         chosen_cookie = input('Choose the price of your cookie: ')
         if not validated('\n' + 'You paid          ', inserted_money):
             invalid_input = True
