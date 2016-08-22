@@ -4,6 +4,7 @@ from re import match
 from sys import argv
 from time import time
 from time import sleep
+import pyperclip
 
 if len(argv) == 1: print('Please enter the name of log file as flag like - cookie Gennadii_Mishchevskii'); exit()
 
@@ -13,7 +14,8 @@ log_api = {
     "number_of_tries" : -1,
     "reader_is_updated": True,
     "mistakes": 0,
-    "start_time": int( time() )
+    "start_time": int( time() ),
+    "test_result": 'Task is NOT solved!'
 }
 invalid_input_message = 'Invalid input. Try again.'
 
@@ -82,6 +84,7 @@ if __name__ == '__main__':
     display_task_description()
     json_dump(log_api, log)
     while True:
+        pyperclip.copy('*')
         invalid_input = False
         data = json_load(log)
         inserted_money = input('\n'*2 +'Insert money:                    ')
@@ -89,9 +92,12 @@ if __name__ == '__main__':
         chosen_cookie = input('Choose the price of your cookie: ')
         if len(inserted_money) == 0: print( "You've gotta choose something..." )
         try:
-            if inserted_money[0] == 'e':
+            if '+' in pyperclip.paste():
+                data['test_result'] = 'Task is SOLVED ! ! !'
+                json_dump(data, log)
+                exit()
+            if pyperclip.paste() in 'Choose the price of your cookie: ' or pyperclip.paste() in 'Insert money:':
                 data['mistakes'] += 1
-                inserted_money = inserted_money[1:]
             if not validated('\n' + 'You paid          ', inserted_money):
                 invalid_input = True
             if not invalid_input and not validated('Your cookie costs ', chosen_cookie):
