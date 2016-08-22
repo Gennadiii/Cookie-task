@@ -95,7 +95,7 @@ if __name__ == '__main__':
             if '+' in pyperclip.paste():
                 data['test_result'] = 'Task is SOLVED ! ! !'
                 json_dump(data, log)
-                exit()
+                break
             if pyperclip.paste() in 'Choose the price of your cookie: ' or pyperclip.paste() in 'Insert money:':
                 data['mistakes'] += 1
             if not validated('\n' + 'You paid          ', inserted_money):
