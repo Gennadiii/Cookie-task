@@ -92,7 +92,8 @@ if what_to_display == 'all':
 	display_all()
 	display_time( data['finish_time'] - data['start_time'] )
 	if 'mistakes' in data: print( 'Number of mistakes: ' + str( data['mistakes'] ) ) 
-	# Added mistakes after started interviewing so need check if file has mistakes in it
+	if 'test_result' in data: print('\n' + data['test_result'])
+	# Added features after started interviewing so need to check if file has mistakes in it
 	
 if what_to_display == 'flow':
 	display_flow()
